@@ -17,43 +17,51 @@ class CandidateList extends Component {
   render() {
     const { candidates } = this.props;
     return (
-      <div className='list row'>
-        <div className='col-md-6'>
-          <h4>Candidates List</h4>
-          <div>
-            <Link to='/add-pet'>
-              <button className='button-primary'>Add candidate</button>
+      <div className='container my-4'>
+        <div className='row justify-content-center'>
+          <div className='col text-info'>
+            <h4>Candidates List</h4>
+          </div>
+          <div className='col-auto'>
+            <Link to='/add-candidate'>
+              <button className='btn btn-outline-primary'><i className="fas fa-user-plus"></i></button>
             </Link>
           </div>
-          <table className='u-full-width'>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Animal</th>
-                <th>Breed</th>
-                <th>Location</th>
-                <th>Age</th>
-                <th>Sex</th>
-                <th>Actions</th>
+        </div>
+        <div className='row my-4'>
+          <table className='table table-dark table-hover text-center'>
+            <thead className="text-uppercase text-warning">
+              <tr><th scope='col'>Id</th>
+                <th scope='col'>Full Name</th>
+                <th scope='col'>Seniority</th>
+                <th scope='col'>email</th>
+                <th scope='col'>Status</th>
+                <th scope='col'>Age</th>
+                <th scope='col'>Sex</th>
+                <th scope='col'>Actions</th>
               </tr>
             </thead>
             <tbody>
               {candidates &&
                 candidates.map(
-                  ({ id, name, animal, breed, location, age, sex }, i) => (
+                  ({ id, fullname, seniority, email, hired, age, sex }, i) => (
                     <tr key={i}>
-                      <td>{name}</td>
-                      <td>{animal}</td>
-                      <td>{breed}</td>
-                      <td>{location}</td>
+                      <th scope='row'>{id}</th>
+                      <td>{fullname}</td>
+                      <td>{seniority}</td>
+                      <td>{email}</td>
+                      <td className='text-capitalize'>{hired}</td>
                       <td>{age}</td>
-                      <td>{sex}</td>
+                      <td>{sex==='male' ? (<i class="text-info fas fa-male"></i>):(<i class="text-warning fas fa-female"></i>)}</td>
                       <td>
-                        <button onClick={() => this.removeCandidate(id)}>
-                          Delete
+                        <button
+                          className='text-white border-0 btn btn-outline-secondary'
+                          onClick={() => this.removeCandidate(id)}
+                        >
+                          <i className='fas fa-trash-alt'></i>
                         </button>
                         <Link to={`/edit-candidate/${id}`}>
-                          <button>Edit</button>
+                        <i className='text-white far fa-edit'></i>
                         </Link>
                       </td>
                     </tr>

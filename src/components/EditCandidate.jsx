@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updatePet } from "../pets/actions";
+import { updateCandidate } from "../candidates/actions";
 import { Redirect } from "react-router-dom";
-import PetService from "../pets/petsService";
+import CandidateService from "../candidates/candidatesService";
 
-class EditPet extends Component {
+class EditCandidate extends Component {
   constructor(props) {
     super(props);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeAnimal = this.onChangeAnimal.bind(this);
+    this.onChangeFullName = this.onChangeFullName.bind(this);
+    this.onChangeSeniority = this.onChangeSeniority.bind(this);
     this.onChangeBreed = this.onChangeBreed.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.onChangeHiredStatus = this.onChangeHiredStatus.bind(this);
     this.onChangeAge = this.onChangeAge.bind(this);
     this.onChangeSex = this.onChangeSex.bind(this);
-    this.savePet = this.savePet.bind(this);
+    this.saveCandidate = this.saveCandidate.bind(this);
 
     this.state = {
-      currentPet: {
-        name: "",
-        animal: "",
-        breed: "",
-        location: "",
+      currentCandidate: {
+        fullname: "",
+        seniority: "",
+        email: "",
+        hired: "",
         age: "",
         sex: "",
       },
@@ -29,52 +29,53 @@ class EditPet extends Component {
   }
 
   componentDidMount() {
-    this.getPet(window.location.pathname.replace("/edit-pet/", ""));
+    this.getCandidate(window.location.pathname.replace("/edit-candidate/", ""));
   }
 
-  onChangeName(e) {
-    const name = e.target.value;
+  onChangeFullName(e) {
+    const fullname = e.target.value;
     this.setState(function (prevState) {
       return {
-        currentPet: {
-          ...prevState.currentPet,
-          name: name,
+        currentCandidate: {
+          ...prevState.currentCandidate,
+          fullname: fullname,
         },
       };
     });
   }
 
-  onChangeAnimal(e) {
-    const animal = e.target.value;
+  onChangeSeniority(e) {
+    console.log('SENIORITY');
+    const seniority = e.target.value;
     this.setState(function (prevState) {
       return {
-        currentPet: {
-          ...prevState.currentPet,
-          animal: animal,
+        currentCandidate: {
+          ...prevState.currentCandidate,
+          seniority: seniority,
         },
       };
     });
   }
 
   onChangeBreed(e) {
-    const breed = e.target.value;
+    const email = e.target.value;
     this.setState(function (prevState) {
       return {
-        currentPet: {
-          ...prevState.currentPet,
-          breed: breed,
+        currentCandidate: {
+          ...prevState.currentCandidate,
+          email: email,
         },
       };
     });
   }
 
-  onChangeLocation(e) {
-    const location = e.target.value;
+  onChangeHiredStatus(e) {
+    const hired = e.target.value;
     this.setState(function (prevState) {
       return {
-        currentPet: {
-          ...prevState.currentPet,
-          location: location,
+        currentCandidate: {
+          ...prevState.currentCandidate,
+          hired: hired,
         },
       };
     });
@@ -84,8 +85,8 @@ class EditPet extends Component {
     const age = e.target.value;
     this.setState(function (prevState) {
       return {
-        currentPet: {
-          ...prevState.currentPet,
+        currentCandidate: {
+          ...prevState.currentCandidate,
           age: age,
         },
       };
@@ -96,25 +97,25 @@ class EditPet extends Component {
     const sex = e.target.value;
     this.setState(function (prevState) {
       return {
-        currentPet: {
-          ...prevState.currentPet,
+        currentCandidate: {
+          ...prevState.currentCandidate,
           sex: sex,
         },
       };
     });
   }
 
-  getPet(id) {
-    PetService.get(id).then((response) => {
+  getCandidate(id) {
+    CandidateService.get(id).then((response) => {
       this.setState({
-        currentPet: response.data,
+        currentCandidate: response.data,
       });
     });
   }
 
-  savePet() {
+  saveCandidate() {
     this.props
-      .updatePet(this.state.currentPet.id, this.state.currentPet)
+      .updateCandidate(this.state.currentCandidate.id, this.state.currentCandidate)
       .then(() => {
         this.setState({
           redirect: true,
@@ -123,50 +124,51 @@ class EditPet extends Component {
   }
 
   render() {
-    const { redirect, currentPet } = this.state;
+    const { redirect, currentCandidate } = this.state;
     if (redirect) {
       return <Redirect to='/' />;
     }
 
     return (
       <div className='submit-form'>
+        
         <div>
           <div className='form-group'>
-            <label htmlFor='name'>Name</label>
+            <label htmlFor='name'>Full Name {this.state.currentCandidate.fullname}</label>
             <input
               type='text'
               className='form-control'
-              id='name'
+              id='fullname'
               required
-              value={currentPet.name}
-              onChange={this.onChangeName}
-              name='name'
+              value={currentCandidate.fullname}
+              onChange={this.onChangeFullName}
+              name='fullname'
             />
           </div>
 
           <div className='form-group'>
-            <label htmlFor='animal'>Animal</label>
+            <label htmlFor='animal'>Seniority</label>
             <input
               type='text'
               className='form-control'
-              id='animal'
+              id='seniority'
               required
-              value={currentPet.animal}
-              onChange={this.onChangeAnimal}
-              name='animal'
+              value={currentCandidate.seniority}
+              onChange={this.onChangeSeniority}
+              name='seniority'
             />
           </div>
 
           <div className='form-group'>
-            <label htmlFor='breed'>Breed</label>
+            <label htmlFor='email'>Email</label>
             <input
               type='text'
               className='form-control'
-              id='breed'
+              id='email'
               required
-              value={currentPet.breed}
+              value={currentCandidate.email}
               onChange={this.onChangeBreed}
-              name='breed'
+              name='email'
             />
           </div>
 
@@ -177,7 +179,7 @@ class EditPet extends Component {
               className='form-control'
               id='location'
               required
-              value={currentPet.location}
+              value={currentCandidate.location}
               onChange={this.onChangeLocation}
               name='location'
             />
@@ -190,7 +192,7 @@ class EditPet extends Component {
               className='form-control'
               id='age'
               required
-              value={currentPet.age}
+              value={currentCandidate.age}
               onChange={this.onChangeAge}
               name='age'
             />
@@ -203,12 +205,12 @@ class EditPet extends Component {
               className='form-control'
               id='sex'
               required
-              value={currentPet.sex}
+              value={currentCandidate.sex}
               onChange={this.onChangeSex}
               name='sex'
             />
           </div>
-          <button onClick={this.savePet} className='btn btn-success'>
+          <button onClick={this.saveCandidate} className='btn btn-success'>
             Submit
           </button>
         </div>
@@ -217,4 +219,4 @@ class EditPet extends Component {
   }
 }
 
-export default connect(null, { updatePet })(EditPet);
+export default connect(null, { updateCandidate })(EditCandidate);

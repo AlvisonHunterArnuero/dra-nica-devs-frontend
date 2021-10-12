@@ -8,15 +8,10 @@ import {
 import CandidatesService from "./candidatesService";
 
 export const createCandidate =
-  (name, animal, breed, location, age, sex) => async (dispatch) => {
+  (fullname, seniority, email, hired, age, sex) => async (dispatch) => {
     try {
       const res = await CandidatesService.create({
-        name,
-        animal,
-        breed,
-        location,
-        age,
-        sex,
+        fullname, seniority, email, hired, age, sex
       });
 
       dispatch({

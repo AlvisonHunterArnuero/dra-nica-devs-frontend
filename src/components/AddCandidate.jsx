@@ -2,300 +2,199 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { createPet } from "../pets/actions";
+import { createCandidate } from "../candidates/actions";
 
 import { Redirect } from "react-router-dom";
 
-class AddPet extends Component {
-
- constructor(props) {
-
-   super(props);
-
-   this.onChangeName = this.onChangeName.bind(this);
-
-   this.onChangeAnimal = this.onChangeAnimal.bind(this);
-
-   this.onChangeBreed = this.onChangeBreed.bind(this);
-
-   this.onChangeLocation = this.onChangeLocation.bind(this);
-
-   this.onChangeAge = this.onChangeAge.bind(this);
-
-   this.onChangeSex = this.onChangeSex.bind(this);
-
-   this.savePet = this.savePet.bind(this);
-
-   this.state = {
-
-     name: "",
-
-     animal: "",
-
-     breed: "",
-
-     location: "",
-
-     age: "",
-
-     sex: "",
-
-     redirect: false,
-
-   };
-
- }
-
- onChangeName(e) {
-
-   this.setState({
-
-     name: e.target.value,
-
-   });
-
- }
-
- onChangeAnimal(e) {
-
-   this.setState({
-
-     animal: e.target.value,
-
-   });
-
- }
-
- onChangeBreed(e) {
-
-   this.setState({
-
-     breed: e.target.value,
-
-   });
-
- }
-
- onChangeLocation(e) {
-
-   this.setState({
-
-     location: e.target.value,
-
-   });
-
- }
-
- onChangeAge(e) {
-
-   this.setState({
-
-     age: e.target.value,
-
-   });
-
- }
-
- onChangeSex(e) {
-
-   this.setState({
-
-     sex: e.target.value,
-
-   });
-
- }
-
- savePet() {
-
-   const { name, animal, breed, location, age, sex } = this.state;
-
-   this.props.createPet(name, animal, breed, location, age, sex).then(() => {
-
-     this.setState({
-
-       redirect: true,
-
-     });
-
-   });
-
- }
-
- render() {
-
-   const { redirect } = this.state;
-
-   if (redirect) {
-
-     return <Redirect to="/" />;
-
-   }
-
-   return (
-
-     <div className="submit-form">
-
-       <div>
-
-         <div className="form-group">
-
-           <label htmlFor="name">Name</label>
-
-           <input
-
-             type="text"
-
-             className="form-control"
-
-             id="name"
-
-             required
-
-             value={this.state.name}
-
-             onChange={this.onChangeName}
-
-             name="name"
-
-           />
-
-         </div>
-
-         <div className="form-group">
-
-           <label htmlFor="animal">Animal</label>
-
-           <input
-
-             type="text"
-
-             className="form-control"
-
-             id="animal"
-
-             required
-
-             value={this.state.animal}
-
-             onChange={this.onChangeAnimal}
-
-             name="animal"
-
-           />
-
-         </div>
-
-         <div className="form-group">
-
-           <label htmlFor="breed">Breed</label>
-
-           <input
-
-             type="text"
-
-             className="form-control"
-
-             id="breed"
-
-             required
-
-             value={this.state.breed}
-
-             onChange={this.onChangeBreed}
-
-             name="breed"
-
-           />
-
-         </div>
-
-         <div className="form-group">
-
-           <label htmlFor="location">Location</label>
-
-           <input
-
-             type="text"
-
-             className="form-control"
-
-             id="location"
-
-             required
-
-             value={this.state.location}
-
-             onChange={this.onChangeLocation}
-
-             name="location"
-
-           />
-
-         </div>
-
-         <div className="form-group">
-
-           <label htmlFor="age">Age</label>
-
-           <input
-
-             type="text"
-
-             className="form-control"
-
-             id="age"
-
-             required
-
-             value={this.state.age}
-
-             onChange={this.onChangeAge}
-
-             name="age"
-
-           />
-
-         </div>
-
-         <div className="form-group">
-
-           <label htmlFor="sex">Sex</label>
-
-           <input
-
-             type="text"
-
-             className="form-control"
-
-             id="sex"
-
-             required
-
-             value={this.state.sex}
-
-             onChange={this.onChangeSex}
-
-             name="sex"
-
-           />
-
-         </div>
-
-         <button onClick={this.savePet} className="btn btn-success">
-
-           Submit
-
-         </button>
-
-       </div>
-
-     </div>
-
-   );
-
- }
-
+class AddCandidate extends Component {
+  constructor(props) {
+    super(props);
+    this.onChangeFullName = this.onChangeFullName.bind(this);
+    this.onChangeSeniority = this.onChangeSeniority.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeHired = this.onChangeHired.bind(this);
+    this.onChangeAge = this.onChangeAge.bind(this);
+    this.onChangeSex = this.onChangeSex.bind(this);
+    this.saveCandidate = this.saveCandidate.bind(this);
+
+    this.state = {
+      fullname: "",
+      seniority: "",
+      email: "",
+      hired: "",
+      age: 0,
+      sex: "",
+      redirect: false,
+    };
+  }
+
+  onChangeFullName(e) {
+    this.setState({
+      fullname: e.target.value,
+    });
+  }
+
+  onChangeSeniority(e) {
+    this.setState({
+      seniority: e.target.value,
+    });
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value,
+    });
+  }
+
+  onChangeHired(e) {
+    this.setState({
+      hired: e.target.value,
+    });
+  }
+
+  onChangeAge(e) {
+    this.setState({
+      age: e.target.value,
+    });
+  }
+
+  onChangeSex(e) {
+    this.setState({
+      sex: e.target.value,
+    });
+  }
+
+  saveCandidate() {
+    const { fullname, seniority, email, hired, age, sex } = this.state;
+    this.props
+      .createCandidate(fullname, seniority, email, hired, age, sex)
+      .then(() => {
+        this.setState({
+          redirect: true,
+        });
+      });
+  }
+
+  render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to='/' />;
+    }
+
+    return (
+      <div className='container text-white my-4'>
+        <div className='mb-3'>
+          <label className='form-label' htmlFor='name'>
+            Full Name
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            id='fullname'
+            required
+            value={this.state.fullname}
+            onChange={this.onChangeFullName}
+            name='fullname'
+          />
+        </div>
+
+        <div className='mb-3'>
+          <label className='form-label' htmlFor='seniority'>
+            Seniority
+          </label>
+          <select
+            className='form-select'
+            aria-label='Seniority Level'
+            id='seniority'
+            required
+            value={this.state.seniority}
+            onChange={this.onChangeSeniority}
+            name='seniority'
+          >
+            <option defaultValue>Trainee</option>
+            <option value='mid'>Junior</option>
+            <option value='mid'>Mid</option>
+            <option value='senior'>Senior</option>
+            <option value='leader'>Leader</option>
+          </select>
+        </div>
+
+        <div className='mb-3'>
+          <label className='form-label' htmlFor='email'>
+            Email
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            id='email'
+            required
+            value={this.state.email}
+            onChange={this.onChangeEmail}
+            name='email'
+          />
+        </div>
+
+        <div className='mb-3'>
+          <label className='form-label' htmlFor='hired'>
+            Status
+          </label>
+          <select
+            className='form-select'
+            aria-label='Status Level'
+            id='hired'
+            required
+            value={this.state.hired}
+            onChange={this.onChangeHired}
+            name='hired'
+          >
+            <option defaultValue>Referred</option>
+            <option value='interviewed'>Interviewed</option>
+            <option value='hired'>Hired</option>
+            <option value='rejected'>Rejected</option>
+          </select>
+        </div>
+
+        <div className='mb-3'>
+          <label className='form-label' htmlFor='age'>
+            Age
+          </label>
+          <input
+            type='text'
+            className='form-control'
+            id='age'
+            required
+            pattern='\d{2}'
+            maxLength='2'
+            value={this.state.age}
+            onChange={this.onChangeAge}
+            name='age'
+          />
+        </div>
+
+        <div className='mb-3'>
+          <label className='form-label' htmlFor='sex'>
+            Sex
+          </label>
+          <select
+            className='form-select'
+            aria-label='Sex Type'
+            id='sex'
+            required
+            value={this.state.sex}
+            onChange={this.onChangeSex}
+            name='sex'
+          >
+            <option defaultValue>Male</option>
+            <option value='female'>Female</option>
+            <option value='other'>Other</option>
+          </select>
+        </div>
+
+        <button onClick={this.saveCandidate} className='btn btn-success'>
+          Save
+        </button>
+      </div>
+    );
+  }
 }
-
-export default connect(null, { createPet })(AddPet);
+export default connect(null, { createCandidate })(AddCandidate);
