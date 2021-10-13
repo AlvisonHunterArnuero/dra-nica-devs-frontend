@@ -24,20 +24,38 @@ class CandidateList extends Component {
           </div>
           <div className='col-auto'>
             <Link to='/add-candidate'>
-              <button className='btn btn-outline-primary'><i className="fas fa-user-plus"></i></button>
+              <button className='btn btn-outline-primary'>
+                <i className='fas fa-user-plus'></i>
+              </button>
             </Link>
           </div>
         </div>
+        <div className='row justify-content-center mt-3'>
+          <div className='input-group mb-3'>
+            <span className='input-group-text' id='basic-addon1'>
+              <i className='fas fa-search'></i>
+            </span>
+            <input
+              type='text'
+              className='form-control'
+              placeholder='Type your search'
+              aria-label='Username'
+              aria-describedby='basic-addon1'
+            />
+          </div>
+        </div>
+
         <div className='row my-4'>
           <table className='table table-dark table-hover text-center'>
-            <thead className="text-uppercase text-warning">
-              <tr><th scope='col'>Id</th>
+            <thead className='text-uppercase text-warning'>
+              <tr>
+                <th scope='col'>Id</th>
                 <th scope='col'>Full Name</th>
                 <th scope='col'>Seniority</th>
                 <th scope='col'>email</th>
                 <th scope='col'>Status</th>
                 <th scope='col'>Age</th>
-                <th scope='col'>Sex</th>
+                <th scope='col'>Gender</th>
                 <th scope='col'>Actions</th>
               </tr>
             </thead>
@@ -52,7 +70,13 @@ class CandidateList extends Component {
                       <td>{email}</td>
                       <td className='text-capitalize'>{hired}</td>
                       <td>{age}</td>
-                      <td>{sex==='male' ? (<i class="text-info fas fa-male"></i>):(<i class="text-warning fas fa-female"></i>)}</td>
+                      <td>
+                        {sex === "male" ? (
+                          <i className='text-info fas fa-male'></i>
+                        ) : (
+                          <i className='text-warning fas fa-female'></i>
+                        )}
+                      </td>
                       <td>
                         <button
                           className='text-white border-0 btn btn-outline-secondary'
@@ -61,7 +85,7 @@ class CandidateList extends Component {
                           <i className='fas fa-trash-alt'></i>
                         </button>
                         <Link to={`/edit-candidate/${id}`}>
-                        <i className='text-white far fa-edit'></i>
+                          <i className='text-white far fa-edit'></i>
                         </Link>
                       </td>
                     </tr>

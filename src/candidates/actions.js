@@ -10,17 +10,18 @@ import CandidatesService from "./candidatesService";
 export const createCandidate =
   (fullname, seniority, email, hired, age, sex) => async (dispatch) => {
     try {
+      console.log('TESt');
       const res = await CandidatesService.create({
         fullname, seniority, email, hired, age, sex
       });
-
-      dispatch({
+      await dispatch({
         type: CREATE_CANDIDATE,
         payload: res.data,
       });
-
-      return Promise.resolve(res.data);
+      console.log('==>', res.data);
+      return await Promise.resolve(res.data);
     } catch (err) {
+      console.log(err)
       return Promise.reject(err);
     }
   };
@@ -28,7 +29,7 @@ export const createCandidate =
 export const retrieveCandidates = () => async (dispatch) => {
   try {
     const res = await CandidatesService.getAll();
-    dispatch({
+    await dispatch({
       type: RETRIEVE_CANDIDATES,
       payload: res.data,
     });
@@ -40,13 +41,14 @@ export const retrieveCandidates = () => async (dispatch) => {
 export const updateCandidate = (id, data) => async (dispatch) => {
   try {
     const res = await CandidatesService.update(id, data);
-    dispatch({
+    await dispatch({
       type: UPDATE_CANDIDATE,
       payload: data,
     });
 
-    return Promise.resolve(res.data);
+    return await Promise.resolve(res.data);
   } catch (err) {
+    console.log(err)
     return Promise.reject(err);
   }
 };
@@ -54,7 +56,7 @@ export const updateCandidate = (id, data) => async (dispatch) => {
 export const deleteCandidate = (id) => async (dispatch) => {
   try {
     await CandidatesService.delete(id);
-    dispatch({
+    await dispatch({
       type: DELETE_CANDIDATE,
       payload: { id },
     });

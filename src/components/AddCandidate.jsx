@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-
 import { connect } from "react-redux";
-
 import { createCandidate } from "../candidates/actions";
-
 import { Redirect } from "react-router-dom";
-
 class AddCandidate extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +15,11 @@ class AddCandidate extends Component {
 
     this.state = {
       fullname: "",
-      seniority: "",
+      seniority: "trainee",
       email: "",
-      hired: "",
-      age: 0,
-      sex: "",
+      hired: "referred",
+      age: "",
+      sex: "male",
       redirect: false,
     };
   }
@@ -66,6 +62,7 @@ class AddCandidate extends Component {
 
   saveCandidate() {
     const { fullname, seniority, email, hired, age, sex } = this.state;
+
     this.props
       .createCandidate(fullname, seniority, email, hired, age, sex)
       .then(() => {
@@ -80,7 +77,6 @@ class AddCandidate extends Component {
     if (redirect) {
       return <Redirect to='/' />;
     }
-
     return (
       <div className='container text-white my-4'>
         <div className='mb-3'>
@@ -111,8 +107,8 @@ class AddCandidate extends Component {
             onChange={this.onChangeSeniority}
             name='seniority'
           >
-            <option defaultValue>Trainee</option>
-            <option value='mid'>Junior</option>
+            <option defaultValue='trainee'>Trainee</option>
+            <option value='junior'>Junior</option>
             <option value='mid'>Mid</option>
             <option value='senior'>Senior</option>
             <option value='leader'>Leader</option>
@@ -147,7 +143,7 @@ class AddCandidate extends Component {
             onChange={this.onChangeHired}
             name='hired'
           >
-            <option defaultValue>Referred</option>
+            <option defaultValue='referred'>Referred</option>
             <option value='interviewed'>Interviewed</option>
             <option value='hired'>Hired</option>
             <option value='rejected'>Rejected</option>
@@ -184,7 +180,7 @@ class AddCandidate extends Component {
             onChange={this.onChangeSex}
             name='sex'
           >
-            <option defaultValue>Male</option>
+            <option defaultValue='male'>Male</option>
             <option value='female'>Female</option>
             <option value='other'>Other</option>
           </select>
