@@ -13,6 +13,19 @@ class CandidateList extends Component {
       this.props.retrieveCandidates();
     });
   };
+  // To color the hiring status
+  renderSwitch = (param) => {
+    switch (param) {
+      case "interviewed":
+        return <span className='text-info'>{param}</span>;
+      case "hired":
+        return <span className='text-success'>{param}</span>;
+      case "rejected":
+        return <span className='text-danger'>{param}</span>;
+      default:
+        return <span className='text-primary'>{param}</span>;
+    }
+  };
 
   render() {
     const { candidates } = this.props;
@@ -30,7 +43,7 @@ class CandidateList extends Component {
             </Link>
           </div>
         </div>
-        <div className='row justify-content-center mt-3'>
+        {/* <div className='row border border-warning justify-content-center mt-3'>
           <div className='input-group mb-3'>
             <span className='input-group-text' id='basic-addon1'>
               <i className='fas fa-search'></i>
@@ -43,7 +56,7 @@ class CandidateList extends Component {
               aria-describedby='basic-addon1'
             />
           </div>
-        </div>
+        </div> */}
 
         <div className='row my-4'>
           <table className='table table-dark table-hover text-center'>
@@ -68,7 +81,9 @@ class CandidateList extends Component {
                       <td>{fullname}</td>
                       <td>{seniority}</td>
                       <td>{email}</td>
-                      <td className='text-capitalize'>{hired}</td>
+                      <td className='text-capitalize'>
+                        {this.renderSwitch(hired)}
+                      </td>
                       <td>{age}</td>
                       <td>
                         {sex === "male" ? (
