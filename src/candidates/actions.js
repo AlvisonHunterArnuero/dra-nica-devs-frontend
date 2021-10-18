@@ -10,18 +10,21 @@ import CandidatesService from "./candidatesService";
 export const createCandidate =
   (fullname, seniority, email, hired, phone, sex) => async (dispatch) => {
     try {
-      console.log('TESt');
       const res = await CandidatesService.create({
-        fullname, seniority, email, hired, phone, sex
+        fullname,
+        seniority,
+        email,
+        hired,
+        phone,
+        sex,
       });
       await dispatch({
         type: CREATE_CANDIDATE,
         payload: res.data,
       });
-      console.log('==>', res.data);
       return await Promise.resolve(res.data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
       return Promise.reject(err);
     }
   };
@@ -48,7 +51,7 @@ export const updateCandidate = (id, data) => async (dispatch) => {
 
     return await Promise.resolve(res.data);
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return Promise.reject(err);
   }
 };
