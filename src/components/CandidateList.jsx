@@ -67,7 +67,7 @@ class CandidateList extends Component {
                 <th scope='col'>Seniority</th>
                 <th scope='col'>email</th>
                 <th scope='col'>Status</th>
-                <th scope='col'>Age</th>
+                <th scope='col'>Phone</th>
                 <th scope='col'>Gender</th>
                 <th scope='col'>Actions</th>
               </tr>
@@ -75,7 +75,7 @@ class CandidateList extends Component {
             <tbody>
               {candidates &&
                 candidates.map(
-                  ({ id, fullname, seniority, email, hired, age, sex }, i) => (
+                  ({ id, fullname, seniority, email, hired, phone, sex }, i) => (
                     <tr key={i}>
                       <th scope='row'>{id}</th>
                       <td>{fullname}</td>
@@ -84,7 +84,7 @@ class CandidateList extends Component {
                       <td className='text-capitalize'>
                         {this.renderSwitch(hired)}
                       </td>
-                      <td>{age}</td>
+                      <td>{phone}</td>
                       <td>
                         {sex === "male" ? (
                           <i className='text-info fas fa-male'></i>

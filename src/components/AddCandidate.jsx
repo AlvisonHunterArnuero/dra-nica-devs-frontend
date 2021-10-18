@@ -9,7 +9,7 @@ class AddCandidate extends Component {
     this.onChangeSeniority = this.onChangeSeniority.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeHired = this.onChangeHired.bind(this);
-    this.onChangeAge = this.onChangeAge.bind(this);
+    this.onChangePhone = this.onChangePhone.bind(this);
     this.onChangeSex = this.onChangeSex.bind(this);
     this.saveCandidate = this.saveCandidate.bind(this);
 
@@ -18,7 +18,7 @@ class AddCandidate extends Component {
       seniority: "trainee",
       email: "",
       hired: "referred",
-      age: "",
+      phone: "",
       sex: "male",
       redirect: false,
     };
@@ -48,9 +48,9 @@ class AddCandidate extends Component {
     });
   }
 
-  onChangeAge(e) {
+  onChangePhone(e) {
     this.setState({
-      age: e.target.value,
+      phone: e.target.value,
     });
   }
 
@@ -61,10 +61,10 @@ class AddCandidate extends Component {
   }
 
   saveCandidate() {
-    const { fullname, seniority, email, hired, age, sex } = this.state;
+    const { fullname, seniority, email, hired, phone, sex } = this.state;
 
     this.props
-      .createCandidate(fullname, seniority, email, hired, age, sex)
+      .createCandidate(fullname, seniority, email, hired, phone, sex)
       .then(() => {
         this.setState({
           redirect: true,
@@ -151,19 +151,17 @@ class AddCandidate extends Component {
         </div>
 
         <div className='mb-3'>
-          <label className='form-label' htmlFor='age'>
-            Age
+          <label className='form-label' htmlFor='phone'>
+            Phone
           </label>
           <input
             type='text'
             className='form-control'
-            id='age'
+            id='phone'
             required
-            pattern='\d{2}'
-            maxLength='2'
-            value={this.state.age}
-            onChange={this.onChangeAge}
-            name='age'
+            value={this.state.phone}
+            onChange={this.onChangePhone}
+            name='phone'
           />
         </div>
 

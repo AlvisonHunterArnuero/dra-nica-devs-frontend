@@ -11,7 +11,7 @@ class EditCandidate extends Component {
     this.onChangeSeniority = this.onChangeSeniority.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeHired = this.onChangeHired.bind(this);
-    this.onChangeAge = this.onChangeAge.bind(this);
+    this.onChangePhone = this.onChangePhone.bind(this);
     this.onChangeSex = this.onChangeSex.bind(this);
     this.saveCandidate = this.saveCandidate.bind(this);
 
@@ -21,7 +21,7 @@ class EditCandidate extends Component {
         seniority: "",
         email: "",
         hired: "",
-        age: 0,
+        phone: 0,
         sex: "",
       },
       redirect: false,
@@ -80,13 +80,13 @@ class EditCandidate extends Component {
     });
   }
 
-  onChangeAge(e) {
-    const age = e.target.value;
+  onChangePhone(e) {
+    const phone = e.target.value;
     this.setState(function (prevState) {
       return {
         currentCandidate: {
           ...prevState.currentCandidate,
-          age: age,
+          phone: phone,
         },
       };
     });
@@ -201,19 +201,17 @@ class EditCandidate extends Component {
           </select>
         </div>
         <div className='mb-3'>
-          <label className='form-label' htmlFor='age'>
-            Age
+          <label className='form-label' htmlFor='phone'>
+            Phone
           </label>
           <input
             type='text'
             className='form-control'
-            id='age'
+            id='phone'
             required
-            pattern='\d{2}'
-            maxLength='2'
-            value={currentCandidate.age}
-            onChange={this.onChangeAge}
-            name='age'
+            value={currentCandidate.phone}
+            onChange={this.onChangePhone}
+            name='phone'
           />
         </div>
         <div className='mb-3'>
