@@ -3,8 +3,10 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import AddCandidate from "./components/AddCandidate";
 import EditCandidate from "./components/EditCandidate";
 import CandidateList from "./components/CandidateList";
+import LoginForm from "./components/LoginForm";
 
 export default function App() {
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
   return (
     <Router>
       <div>
@@ -15,8 +17,11 @@ export default function App() {
           <Route path="/edit-candidate">
             <EditCandidate />
           </Route>
-          <Route path="/">
-            <CandidateList />
+          <Route 
+
+          path="/">
+            {!isLoggedIn && <LoginForm />}
+            {isLoggedIn && <CandidateList />} 
           </Route>
         </Switch>
       </div>

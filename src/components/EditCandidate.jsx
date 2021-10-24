@@ -109,7 +109,6 @@ class EditCandidate extends Component {
       this.setState({
         currentCandidate: response.data,
       });
-      console.log('Get DATA',response.data);
     });
   }
 
