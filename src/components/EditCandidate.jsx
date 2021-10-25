@@ -130,7 +130,6 @@ class EditCandidate extends Component {
 
     return (
       <div className='container text-white my-4'>
-        `{" "}
         <div className='mb-3'>
           <label className='form-label' htmlFor='name'>
             Full Name {this.state.currentCandidate.fullname}
@@ -145,7 +144,6 @@ class EditCandidate extends Component {
             name='fullname'
           />
         </div>
-        `
         <div className='mb-3'>
           <label className='form-label' htmlFor='seniority'>
             Seniority

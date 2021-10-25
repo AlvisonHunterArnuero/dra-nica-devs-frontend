@@ -33,49 +33,79 @@ class CandidateList extends Component {
       <div className='container my-4'>
         <div className='row justify-content-center'>
           <div className='col text-info'>
-            <h4>Candidates List</h4>
+            <h4>
+              <i className='fas fa-users text-warning'></i> Candidates List
+            </h4>
           </div>
           <div className='col-auto'>
             <Link to='/add-candidate'>
-              <button className='btn btn-outline-primary'>
+              <button
+                className='btn btn-outline-primary'
+                data-bs-toggle='tooltip'
+                data-bs-placement='bottom'
+                title='Add Candidate'
+              >
                 <i className='fas fa-user-plus'></i>
               </button>
             </Link>
           </div>
-        </div>
-        {/* <div className='row border border-warning justify-content-center mt-3'>
-          <div className='input-group mb-3'>
-            <span className='input-group-text' id='basic-addon1'>
-              <i className='fas fa-search'></i>
-            </span>
-            <input
-              type='text'
-              className='form-control'
-              placeholder='Type your search'
-              aria-label='Username'
-              aria-describedby='basic-addon1'
-            />
+          <div className='col-auto'>
+            <button
+              className='btn btn-outline-danger'
+              data-bs-toggle='tooltip'
+              data-bs-placement='bottom'
+              title='Logout'
+              onClick={() => {
+                sessionStorage.clear();
+                window.location.reload(false);
+              }}
+            >
+              <i className='fas fa-sign-out-alt'></i>
+            </button>
           </div>
-        </div> */}
+        </div>
 
         <div className='row my-4'>
           <table className='table table-dark table-hover text-center'>
-            <thead className='text-uppercase text-warning'>
+            <thead className='text-uppercase text-white'>
               <tr>
-                <th scope='col'>Id</th>
-                <th scope='col'>Full Name</th>
-                <th scope='col'>Seniority</th>
-                <th scope='col'>email</th>
-                <th scope='col'>Status</th>
-                <th scope='col'>Phone</th>
-                <th scope='col'>Gender</th>
-                <th scope='col'>Actions</th>
+                <th scope='col'>
+                  <i className='text-muted small fas fa-laptop-code'></i> Id
+                </th>
+                <th scope='col'>
+                  <i className='text-muted small fas fa-file-signature'></i>{" "}
+                  Full Name
+                </th>
+                <th scope='col'>
+                  <i className='text-muted small fas fa-laptop-code'></i>{" "}
+                  Seniority
+                </th>
+                <th scope='col'>
+                  <i className='text-muted small fas fa-traffic-light'></i>{" "}
+                  email
+                </th>
+                <th scope='col'>
+                  <i className='text-muted small fas fa-traffic-light'></i>{" "}
+                  Status
+                </th>
+                <th scope='col'>
+                  <i className='text-muted small fas fa-phone-square'></i> Phone
+                </th>
+                <th scope='col'>
+                  <i className='text-muted small fas fa-venus-mars'></i> Gender
+                </th>
+                <th scope='col'>
+                  <i className='text-muted small fas fa-cog'></i> Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {candidates &&
                 candidates.map(
-                  ({ id, fullname, seniority, email, hired, phone, sex }, i) => (
+                  (
+                    { id, fullname, seniority, email, hired, phone, sex },
+                    i
+                  ) => (
                     <tr key={i}>
                       <th scope='row'>{id}</th>
                       <td>{fullname}</td>
