@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "./static/css/main.e130710c.chunk.css",
-    "main.js": "./static/js/main.b0c021ed.chunk.js",
-    "main.js.map": "./static/js/main.b0c021ed.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.3fc536b7.js",
-    "runtime-main.js.map": "./static/js/runtime-main.3fc536b7.js.map",
-    "static/js/2.5b50926d.chunk.js": "./static/js/2.5b50926d.chunk.js",
-    "static/js/2.5b50926d.chunk.js.map": "./static/js/2.5b50926d.chunk.js.map",
-    "index.html": "./index.html",
-    "static/css/main.e130710c.chunk.css.map": "./static/css/main.e130710c.chunk.css.map",
-    "static/js/2.5b50926d.chunk.js.LICENSE.txt": "./static/js/2.5b50926d.chunk.js.LICENSE.txt"
+    "main.css": "/dra-nica-devs-frontend/static/css/main.e130710c.chunk.css",
+    "main.js": "/dra-nica-devs-frontend/static/js/main.b0c021ed.chunk.js",
+    "main.js.map": "/dra-nica-devs-frontend/static/js/main.b0c021ed.chunk.js.map",
+    "runtime-main.js": "/dra-nica-devs-frontend/static/js/runtime-main.2c147d26.js",
+    "runtime-main.js.map": "/dra-nica-devs-frontend/static/js/runtime-main.2c147d26.js.map",
+    "static/js/2.5b50926d.chunk.js": "/dra-nica-devs-frontend/static/js/2.5b50926d.chunk.js",
+    "static/js/2.5b50926d.chunk.js.map": "/dra-nica-devs-frontend/static/js/2.5b50926d.chunk.js.map",
+    "index.html": "/dra-nica-devs-frontend/index.html",
+    "static/css/main.e130710c.chunk.css.map": "/dra-nica-devs-frontend/static/css/main.e130710c.chunk.css.map",
+    "static/js/2.5b50926d.chunk.js.LICENSE.txt": "/dra-nica-devs-frontend/static/js/2.5b50926d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3fc536b7.js",
+    "static/js/runtime-main.2c147d26.js",
     "static/js/2.5b50926d.chunk.js",
     "static/css/main.e130710c.chunk.css",
     "static/js/main.b0c021ed.chunk.js"
