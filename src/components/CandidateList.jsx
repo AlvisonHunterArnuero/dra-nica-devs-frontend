@@ -64,81 +64,89 @@ class CandidateList extends Component {
             </button>
           </div>
         </div>
-
-        <div className='row my-4'>
-          <table className='table table-dark table-hover text-center'>
-            <thead className='text-uppercase text-white'>
-              <tr>
-                <th scope='col'>
-                  <i className='text-muted small fas fa-laptop-code'></i> Id
-                </th>
-                <th scope='col'>
-                  <i className='text-muted small fas fa-file-signature'></i>{" "}
-                  Full Name
-                </th>
-                <th scope='col'>
-                  <i className='text-muted small fas fa-laptop-code'></i>{" "}
-                  Seniority
-                </th>
-                <th scope='col'>
-                  <i className='text-muted small fas fa-traffic-light'></i>{" "}
-                  email
-                </th>
-                <th scope='col'>
-                  <i className='text-muted small fas fa-traffic-light'></i>{" "}
-                  Status
-                </th>
-                <th scope='col'>
-                  <i className='text-muted small fas fa-phone-square'></i> Phone
-                </th>
-                <th scope='col'>
-                  <i className='text-muted small fas fa-venus-mars'></i> Gender
-                </th>
-                <th scope='col'>
-                  <i className='text-muted small fas fa-cog'></i> Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {candidates &&
-                candidates.map(
-                  (
-                    { id, fullname, seniority, email, hired, phone, sex },
-                    i
-                  ) => (
-                    <tr key={i}>
-                      <th scope='row'>{id}</th>
-                      <td>{fullname}</td>
-                      <td>{seniority}</td>
-                      <td>{email}</td>
-                      <td className='text-capitalize'>
-                        {this.renderSwitch(hired)}
-                      </td>
-                      <td>{phone}</td>
-                      <td>
-                        {sex === "male" ? (
-                          <i className='text-info fas fa-male'></i>
-                        ) : (
-                          <i className='text-warning fas fa-female'></i>
-                        )}
-                      </td>
-                      <td>
-                        <button
-                          className='text-white border-0 btn btn-outline-secondary'
-                          onClick={() => this.removeCandidate(id)}
-                        >
-                          <i className='fas fa-trash-alt'></i>
-                        </button>
-                        <Link to={`/edit-candidate/${id}`}>
-                          <i className='text-white far fa-edit'></i>
-                        </Link>
-                      </td>
-                    </tr>
-                  )
-                )}
-            </tbody>
-          </table>
-        </div>
+        {!candidates ? (
+          <div className='text-center text-info lead'>
+            <span className="text-white">Loading... please wait {" "}</span>
+            <div className='spinner-grow spinner-grow-sm' role='status' />
+          </div>
+        ) : (
+          <div className='row my-4'>
+            <table className='table table-dark table-hover text-center'>
+              <thead className='text-uppercase text-white'>
+                <tr>
+                  <th scope='col'>
+                    <i className='text-muted small fas fa-laptop-code'></i> Id
+                  </th>
+                  <th scope='col'>
+                    <i className='text-muted small fas fa-file-signature'></i>{" "}
+                    Full Name
+                  </th>
+                  <th scope='col'>
+                    <i className='text-muted small fas fa-laptop-code'></i>{" "}
+                    Seniority
+                  </th>
+                  <th scope='col'>
+                    <i className='text-muted small fas fa-traffic-light'></i>{" "}
+                    email
+                  </th>
+                  <th scope='col'>
+                    <i className='text-muted small fas fa-traffic-light'></i>{" "}
+                    Status
+                  </th>
+                  <th scope='col'>
+                    <i className='text-muted small fas fa-phone-square'></i>{" "}
+                    Phone
+                  </th>
+                  <th scope='col'>
+                    <i className='text-muted small fas fa-venus-mars'></i>{" "}
+                    Gender
+                  </th>
+                  <th scope='col'>
+                    <i className='text-muted small fas fa-cog'></i> Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {candidates &&
+                  candidates.map(
+                    (
+                      { id, fullname, seniority, email, hired, phone, sex },
+                      i
+                    ) => (
+                      <tr key={i}>
+                        <th scope='row'>{id}</th>
+                        <td>{fullname}</td>
+                        <td>{seniority}</td>
+                        <td>{email}</td>
+                        <td className='text-capitalize'>
+                          {this.renderSwitch(hired)}
+                        </td>
+                        <td>{phone}</td>
+                        <td>
+                          {sex === "male" ? (
+                            <i className='text-info fas fa-male'></i>
+                          ) : (
+                            <i className='text-warning fas fa-female'></i>
+                          )}
+                        </td>
+                        <td>
+                          <button
+                            className='text-white border-0 btn btn-outline-secondary'
+                            onClick={() => this.removeCandidate(id)}
+                          >
+                            <i className='fas fa-trash-alt'></i>
+                          </button>
+                          <Link to={`/edit-candidate/${id}`}>
+                            <i className='text-white far fa-edit'></i>
+                          </Link>
+                        </td>
+                      </tr>
+                    )
+                  )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     );
   }
