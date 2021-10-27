@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createCandidate } from "../candidates/actions";
 import { Redirect } from "react-router-dom";
+
+import toast from "react-hot-toast";
 class AddCandidate extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +14,7 @@ class AddCandidate extends Component {
     this.onChangePhone = this.onChangePhone.bind(this);
     this.onChangeSex = this.onChangeSex.bind(this);
     this.saveCandidate = this.saveCandidate.bind(this);
+    this.notify = this.notify.bind(this);
 
     this.state = {
       fullname: "",
@@ -60,9 +63,18 @@ class AddCandidate extends Component {
     });
   }
 
+  notify(strcustomTitle) {
+    toast.success(strcustomTitle, {
+      style: {
+        border: "1px dotted black",
+        background: "#cfe2ff",
+        color: "#084298",
+      },
+    });
+  }
+
   saveCandidate() {
     const { fullname, seniority, email, hired, phone, sex } = this.state;
-
     this.props
       .createCandidate(fullname, seniority, email, hired, phone, sex)
       .then(() => {
@@ -70,6 +82,7 @@ class AddCandidate extends Component {
           redirect: true,
         });
       });
+      this.notify('Candidate was saved successfully.');
   }
 
   render() {

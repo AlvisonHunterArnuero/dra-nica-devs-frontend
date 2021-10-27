@@ -2,26 +2,41 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { retrieveCandidates, deleteCandidate } from "../candidates/actions";
+import toast, { Toaster } from "react-hot-toast";
 
 class CandidateList extends Component {
   componentDidMount() {
     this.props.retrieveCandidates();
   }
+  notify(strcustomTitle) {
+    toast.success(strcustomTitle, {
+      style: {
+        border: "1px dotted black",
+        background: "#cfe2ff",
+        color: "#084298",
+      },
+    });
+  }
 
   removeCandidate = (id) => {
     this.props.deleteCandidate(id).then(() => {
       this.props.retrieveCandidates();
+      this.notify("Candidate has been successfully deleted.");
     });
   };
   // To color the hiring status
   renderSwitch = (param) => {
     switch (param) {
       case "interviewed":
-        return <span className='text-info'>{param}</span>;
+        return <span className='text-warning'>{param}</span>;
       case "hired":
-        return <span className='text-success'>{param}</span>;
+        return <span className='text-info'>{param}</span>;
       case "rejected":
-        return <span className='text-danger'>{param}</span>;
+        return (
+          <span className='text-danger text-decoration-line-through'>
+            {param}
+          </span>
+        );
       default:
         return <span className='text-primary'>{param}</span>;
     }
@@ -31,11 +46,13 @@ class CandidateList extends Component {
     const { candidates } = this.props;
     return (
       <div className='container my-4'>
+        <Toaster gutter={8} />
         <div className='row justify-content-center'>
           <div className='col text-info'>
-            <h4>
-              <i className='fas fa-users text-warning'></i> Candidates List
-            </h4>
+            <h2 className="fw-normal">
+              <i className='fas fa-users text-warning'></i> 
+              <span className="text-success"> DRA-NICA-DEVS</span>
+            </h2>
           </div>
           <div className='col-auto'>
             <Link to='/add-candidate'>
@@ -65,10 +82,9 @@ class CandidateList extends Component {
           </div>
         </div>
         {!candidates ? (
-          <div className='text-center text-info lead'>
-            <span className="text-white">Loading... please wait {" "}</span>
-            <div className='spinner-grow spinner-grow-sm' role='status' />
-          </div>
+     <div className="spinner-border text-info" role="status">
+     <span className="visually-hidden">Loading...</span>
+   </div>
         ) : (
           <div className='row my-4'>
             <table className='table table-dark table-hover text-center'>
@@ -106,7 +122,7 @@ class CandidateList extends Component {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className='fw-normal'>
                 {candidates &&
                   candidates.map(
                     (
@@ -116,7 +132,7 @@ class CandidateList extends Component {
                       <tr key={i}>
                         <th scope='row'>{id}</th>
                         <td>{fullname}</td>
-                        <td>{seniority}</td>
+                        <td className='text-capitalize'>{seniority}</td>
                         <td>{email}</td>
                         <td className='text-capitalize'>
                           {this.renderSwitch(hired)}
@@ -124,21 +140,21 @@ class CandidateList extends Component {
                         <td>{phone}</td>
                         <td>
                           {sex === "male" ? (
-                            <i className='text-info fas fa-male'></i>
+                            <i className='text-white fas fa-male'></i>
                           ) : (
                             <i className='text-warning fas fa-female'></i>
                           )}
                         </td>
                         <td>
+                          <Link to={`/edit-candidate/${id}`}>
+                            <i className='text-info far fa-edit'></i>
+                          </Link>
                           <button
-                            className='text-white border-0 btn btn-outline-secondary'
+                            className='text-danger border-0 btn btn-outline-secondary'
                             onClick={() => this.removeCandidate(id)}
                           >
                             <i className='fas fa-trash-alt'></i>
                           </button>
-                          <Link to={`/edit-candidate/${id}`}>
-                            <i className='text-white far fa-edit'></i>
-                          </Link>
                         </td>
                       </tr>
                     )
@@ -158,4 +174,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { retrieveCandidates, deleteCandidate })(CandidateList);
+export default connect(mapStateToProps, {
+  retrieveCandidates,
+  deleteCandidate,
+})(CandidateList);

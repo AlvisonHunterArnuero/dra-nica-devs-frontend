@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { updateCandidate } from "../candidates/actions";
 import { Redirect } from "react-router-dom";
 import CandidateService from "../candidates/candidatesService";
+import toast from "react-hot-toast";
 
 class EditCandidate extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class EditCandidate extends Component {
     this.onChangePhone = this.onChangePhone.bind(this);
     this.onChangeSex = this.onChangeSex.bind(this);
     this.saveCandidate = this.saveCandidate.bind(this);
+    this.notify = this.notify.bind(this);
 
     this.state = {
       currentCandidate: {
@@ -21,7 +23,7 @@ class EditCandidate extends Component {
         seniority: "",
         email: "",
         hired: "",
-        phone: 0,
+        phone: "",
         sex: "",
       },
       redirect: false,
@@ -30,6 +32,16 @@ class EditCandidate extends Component {
 
   componentDidMount() {
     this.getCandidate(window.location.pathname.replace("/edit-candidate/", ""));
+  }
+
+  notify(strcustomTitle) {
+    toast.success(strcustomTitle, {
+      style: {
+        border: "1px dotted black",
+        background: "#cfe2ff",
+        color: "#084298",
+      },
+    });
   }
 
   onChangeFullName(e) {
@@ -114,12 +126,16 @@ class EditCandidate extends Component {
 
   saveCandidate() {
     this.props
-      .updateCandidate(this.state.currentCandidate.id, this.state.currentCandidate)
+      .updateCandidate(
+        this.state.currentCandidate.id,
+        this.state.currentCandidate
+      )
       .then(() => {
         this.setState({
           redirect: true,
         });
       });
+      this.notify("Candidate has been updated.");
   }
 
   render() {
@@ -132,7 +148,7 @@ class EditCandidate extends Component {
       <div className='container text-white my-4'>
         <div className='mb-3'>
           <label className='form-label' htmlFor='name'>
-            Full Name {this.state.currentCandidate.fullname}
+            Full Name {currentCandidate.fullname}
           </label>
           <input
             type='text'
